@@ -12,3 +12,9 @@ size. That way, the position is always kept somewhat in the
 same place.
 
 You move the paddles with the W, S and UP and Down keys.
+
+
+
+Since, the game currently, doesn't get any harder as time goes by,
+the idea is to increase the velocity of the ball the longer
+the two players are able to keep the ball going forth and back.
