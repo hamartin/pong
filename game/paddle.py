@@ -1,63 +1,36 @@
-'''This file represents the paddles in the game.'''
+'''This file represents a paddle in the game.'''
 
 
 from .baserectangle import BaseRectangle
-from .statics import (
-    PIXELMOVE
-)
-
-
-class PaddleError(Exception):
-    pass
 
 
 class Paddle(BaseRectangle):
 
-    '''This class represents the net in the game.'''
+    '''This class represents a paddle in the game.'''
 
-    SIZE_RATIO = (0.0125, 0.125)
-    SIDE = {"LEFT": (0, 0.01125, 0.5), "RIGHT": (1, 0.98875, 0.5)}
+    PERCENT_SIZE = (0.0125, 0.125)
+    # 5 pixels when y == 600
+    PERCENT_MOVE = 0.008333333333333333
 
-    def __init__(self, color, screen_size, side):
-        self.screen_size = screen_size
-        if side not in self.SIDE.keys():
-            raise PaddleError("Side must be either \"LEFT\" or \"RIGHT\", not {0}.".format(side))
-        self.side = side
-        
-        self.paddle_width = int(screen_size[0]*self.SIZE_RATIO[0])
-        self.paddle_height = int(screen_size[1]*self.SIZE_RATIO[1])
+    def __init__(self, color, screen_size):
         super().__init__(color)
-        super().resize((self.paddle_width, self.paddle_height))
+        self.screen_size = screen_size
 
-        pos_x = int(screen_size[0]*self.SIDE[self.side][1])
-        if self.side == "RIGHT":
-            pos_x = pos_x-self.paddle_width
-        pos_y = int(screen_size[1]/2)-int(self.paddle_height/2)
-        super().set_position((pos_x, pos_y))
+        # We calculate the height and width of the paddle.
+        size_x = int(screen_size[0]*self.PERCENT_SIZE[0])
+        size_y = int(screen_size[1]*self.PERCENT_SIZE[1])
+        super().set_size((size_x, size_y))
+
+        # The position of the paddle is calculated by the player object.
 
     def move_down(self):
-        '''Move the sprite in the positive y direction.'''
-        self.rect.y += PIXELMOVE*self.screen_size[1]
-        if self.rect.y > self.screen_size[1]-self.paddle_height:
-            self.rect.y = self.screen_size[1]-self.paddle_height
+        '''Moves the paddle down on the screen.'''
+        self.rect.y += int(self.screen_size[1]*self.PERCENT_MOVE)
+        if self.rect.y > self.screen_size[1]-self.get_size()[1]:
+            self.rect.y = int(self.screen_size[1]-self.get_size()[1])
 
     def move_up(self):
-        '''Move the sprite in the negative y direction.'''
-        self.rect.y -= PIXELMOVE*self.screen_size[1]
+        '''Moves the paddle up on the screen.'''
+        self.rect.y -= int(self.screen_size[1]*self.PERCENT_MOVE)
         if self.rect.y < 0:
             self.rect.y = 0
-
-    def resize(self, screen_size):
-        '''Resizes the sprite to match the current screen size.'''
-        self.screen_size = screen_size
-
-        # Figure out the new sprite size
-        self.paddle_width = int(screen_size[0]*self.SIZE_RATIO[0])
-        self.paddle_height = int(screen_size[1]*self.SIZE_RATIO[1])
-        super().resize((self.paddle_width, self.paddle_height))
-
-        pos_x = int(screen_size[0]*self.SIDE[self.side][1])
-        if self.side == "RIGHT":
-            pos_x = pos_x - self.paddle_width
-        pos_y = int(screen_size[1]/2)-int(self.paddle_height/2)
-        super().set_position((pos_x, pos_y))

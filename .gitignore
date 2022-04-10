@@ -130,3 +130,6 @@ dmypy.json
 
 # Vim swap files
 *.swp
+
+# I tend to keep files to replace in and old folder.
+old/*

@@ -1,15 +1,15 @@
 '''This file contains all the static parts of the game.'''
 
+# MISC
 CAPTION = "Pong"
 FPS = 60
+
+# Sizes
 INITIAL_SCREEN_HEIGHT = 600
 INITIAL_SCREEN_WIDTH = 800
 INITIAL_SCREEN_SIZE = (INITIAL_SCREEN_WIDTH, INITIAL_SCREEN_HEIGHT)
-# When y=600, this converts into moving something 5 pixels.
-PIXELMOVE = 0.008333333333333333
-BALLMOVE = (0.01, 0.006666666666666667)
 
-# COLORS
+# Colors
 BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)

@@ -4,12 +4,6 @@
 Pong!
 
 Its a game!
-
-TODO: There are one known hurdle which hurts my brain at the current moment.
-      If you change the screen size mid game, the paddles and ball will
-      change position. This is because, when the screen size changes, we
-      need to calculate the relative distance in pixels from the old to the
-      new screen size. Or any mechanism that will have the same end result.
 '''
 
 
