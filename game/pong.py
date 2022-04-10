@@ -50,7 +50,7 @@ class Pong:
         self.sprites.add(self.player2.get_sprite())
 
     def _init_view(self):
-        self.screen = pygame.display.set_mode(INITIAL_SCREEN_SIZE, pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode(INITIAL_SCREEN_SIZE)
         self.clock = pygame.time.Clock()
 
         pygame.init()
