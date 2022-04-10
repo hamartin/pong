@@ -59,8 +59,11 @@ class Pong:
     def _draw(self):
         self.screen.fill(BLACK)
         self.screen.blit(self.background, (0, 0))
+        score_font, size = self.player1.get_score()
+        self.screen.blit(score_font, (10, 10))
+        score_font, size = self.player2.get_score()
+        self.screen.blit(score_font, (self.screen.get_size()[0]-size[0]-10, 10))
         self.sprites.draw(self.screen)
-
         pygame.display.flip()
 
     def _game_logic(self):

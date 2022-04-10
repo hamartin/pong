@@ -1,8 +1,11 @@
 '''This file represents a player in the game.'''
 
 
+import pygame
+
 from .paddle import Paddle
 from .statics import (
+    YELLOW,
     WHITE
 )
 
@@ -26,6 +29,7 @@ class Player:
         self.screen_size = screen_size
         self.paddle = Paddle(WHITE, screen_size)
         self.points = 0
+        self.font = pygame.font.Font("freesansbold.ttf", 32)
 
         if side not in self.PERCENT_POS.keys():
             raise PlayerError("Side cannot be {0}, must be one of {1}.".format(side, self.PERCENT_POS.keys()))
@@ -38,6 +42,12 @@ class Player:
         self.paddle.set_position((pos_x, pos_y))
 
         # The size of the paddle is handled by the Paddle object itself.
+
+    def get_score(self):
+        '''Returns the players score as a pygame font.'''
+        text = self.font.render("Player: {0}".format(self.points), True, YELLOW)
+        size = text.get_size()
+        return (text, size)
 
     def get_sprite(self):
         '''Returns the paddle sprite.'''
