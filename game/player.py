@@ -5,6 +5,8 @@ import pygame
 
 from .paddle import Paddle
 from .statics import (
+    GREEN,
+    RED,
     YELLOW,
     WHITE
 )
@@ -25,14 +27,17 @@ class Player:
     }
 
     def __init__(self, side, screen_size):
-        self.side = side
-        self.screen_size = screen_size
-        self.paddle = Paddle(WHITE, screen_size)
-        self.points = 0
-        self.font = pygame.font.Font("freesansbold.ttf", 32)
-
         if side not in self.PERCENT_POS.keys():
             raise PlayerError("Side cannot be {0}, must be one of {1}.".format(side, self.PERCENT_POS.keys()))
+
+        self.side = side
+        self.screen_size = screen_size
+        if side == "LEFT":
+            self.paddle = Paddle(GREEN, screen_size)
+        else:
+            self.paddle = Paddle(RED, screen_size)
+        self.points = 0
+        self.font = pygame.font.Font("freesansbold.ttf", 32)
 
         # We calculate the position of the net.
         pos_x = int(screen_size[0]*self.PERCENT_POS[side][0])

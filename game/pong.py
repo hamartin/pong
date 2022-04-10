@@ -87,7 +87,7 @@ class Pong:
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_x:
+                if event.key == pygame.K_ESCAPE:
                     self.running = False
                 elif event.key == pygame.K_SPACE and self.ball.vel_x == 0 and self.ball.vel_y == 0:
                     self.ball.random_velocity()
@@ -120,3 +120,5 @@ class Pong:
             self._draw()
             # This makes sure the game framerate and controlls go no faster than FPS times a second.
             self.clock.tick(FPS)
+        pygame.quit()
+
